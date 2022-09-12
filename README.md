@@ -1,16 +1,16 @@
 # Peacasso
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/victordibia/peacasso/blob/master/notebooks/tutorial.ipynb)
+[comment]: <> ([![Open In Colab]&#40;https://colab.research.google.com/assets/colab-badge.svg&#41;]&#40;https://colab.research.google.com/github/victordibia/peacasso/blob/master/notebooks/tutorial.ipynb&#41;)
 
-Peacasso [Beta] is a UI tool to help you generate art (and experiment) with multimodal (text, image) AI models (stable diffusion). This project is still in development (see roadmap below).
+Peacasso neonsecret's edition [Beta] is a UI tool to help you generate art (and experiment) with multimodal (text, image) AI models (stable diffusion). This project is still in development (see roadmap below).
 
 ![](docs/images/screenpc.png)
 
-## Why Use Peacasso?
+## Why Use Peacasso (neonsecret's edition)?
 
 <img width="100%" src="docs/images/peacasso.gif" />
 
-Because you deserve a nice UI and great workflow that makes exploring stable diffusion models fun! But seriously, here are a few things that make Peacasson interesting:
+Because you deserve a nice UI and great workflow that makes exploring stable diffusion models fun, while using insanely high-resolution images! But seriously, here are a few things that make Peacasson interesting:
 
 - **Easy installation**. Instead of cobbling together command line scripts, Peacasso provides a `pip install` flow and a UI that supports a set of curated default operations.
 - **UI with good defaults**. The current implementation of Peacasso provides a UI for basic operations - text and image based prompting, remixing generated images as prompts, model parameter selection. Also covers the little things .. like light and dark mode.
@@ -25,7 +25,10 @@ Clearly, Peacasso (UI) might not be for those interested in low level code.
   Access to the diffusion model weights requires a HuggingFace model account and access token. Please create an account at [huggingface.co](https://huggingface.co/), get an [access token](https://huggingface.co/settings/tokens) and agree to the model terms [here](https://huggingface.co/CompVis/stable-diffusion-v1-4). Next, create a `HF_API_TOKEN` environment variable containing your token. `export HF_API_TOKEN=your_token`. Note that the first time you run peacasso, the weights for the SD model are [cached locally](https://huggingface.co/transformers/v4.0.1/installation.html#caching-models) on your machine. In theory, you can download the weights, and run peacasso by pointing to the folder with the weights.
 
 - Step 2: **Verify Environment - Pythong 3.7+ and CUDA**
-  Setup and verify that your python environment is `python 3.7` or higher (preferably, use Conda). Also verify that you have CUDA installed correctly (`torch.cuda.is_available()` is true) and your GPU has about [7GB of VRAM memory](https://stability.ai/blog/stable-diffusion-public-release).
+  Setup and verify that your python environment is `python 3.7` or higher (preferably, use Conda). Also verify that you have CUDA installed correctly (`torch.cuda.is_available()` is true) and your GPU has at least [2GB of VRAM memory](https://stability.ai/blog/stable-diffusion-public-release).
+
+- Step 3: **Download the model.ckpt**
+  And put it to `peacasso/neon_diff/models/ldm/stable-diffusion-v1/model.ckpt`
 
 Once requirements are met, run the following command to install the library:
 

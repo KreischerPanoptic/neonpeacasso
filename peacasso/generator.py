@@ -74,6 +74,10 @@ class ImageGenerator:
         del sd
         self._model.half()
         self._modelCS.half()
+        self._modelFS.half()
+        self._model.to(torch.device(cuda_device))
+        self._modelFS.to(torch.device(cuda_device))
+        self._model.to(torch.device(cuda_device))
 
         # assert token is not None, "HF_API_TOKEN environment variable must be set."
         # self.device = f"cuda:{cuda_device}" if torch.cuda.is_available() else "cpu"
