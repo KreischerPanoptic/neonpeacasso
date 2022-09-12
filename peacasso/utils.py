@@ -1,9 +1,9 @@
 import base64
-import json
-from typing import Any, List
-import os
-from PIL import Image
 import io
+import os
+from typing import List
+
+from PIL import Image
 
 
 def get_dirs(path: str) -> List[str]:

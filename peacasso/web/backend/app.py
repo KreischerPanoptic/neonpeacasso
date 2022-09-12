@@ -1,20 +1,23 @@
-from io import BytesIO
+import hashlib
 import io
-import zipfile
-from fastapi import FastAPI
-from fastapi.staticfiles import StaticFiles
 import os
-from peacasso.generator import ImageGenerator
+import zipfile
+from io import BytesIO
+
+import numpy as np
+from PIL import Image
+from einops import rearrange
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
-from peacasso.datamodel import GeneratorConfig
-import hashlib
+from fastapi.staticfiles import StaticFiles
 
+from peacasso.datamodel import GeneratorConfig
+from peacasso.generator import ImageGenerator
 from peacasso.utils import base64_to_pil
 
 # # load token from .env variable
-hf_token = os.environ.get("HF_API_TOKEN")
-generator = ImageGenerator(token=hf_token)
+generator = ImageGenerator()
 
 app = FastAPI()
 # allow cross origin requests for testing on localhost:800* ports only
@@ -52,7 +55,6 @@ def generate(prompt_config: GeneratorConfig) -> str:
     # print(prompt_config.init_image)
     if prompt_config.init_image:
         prompt_config.init_image = base64_to_pil(prompt_config.init_image)
-    result = None
     try:
         result = generator.generate(prompt_config)
     except Exception as e:
@@ -63,10 +65,12 @@ def generate(prompt_config: GeneratorConfig) -> str:
         with zipfile.ZipFile(
             zip_io, mode="w", compression=zipfile.ZIP_DEFLATED
         ) as temp_zip:
-            for i, image in enumerate(result["images"]):
+            for i, image in enumerate(result):
                 zip_path = os.path.join("/", str(slug) + "_" + str(i) + ".png")
                 # Add file, at correct path
                 img_byte_arr = io.BytesIO()
+                image = 255.0 * rearrange(image[0], "c h w -> h w c").cpu().numpy()
+                image = Image.fromarray(image.astype(np.uint8))
                 image.save(img_byte_arr, format="PNG")
                 image.close()
                 temp_zip.writestr(zip_path, img_byte_arr.getvalue())

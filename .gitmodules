@@ -1,0 +1,3 @@
+[submodule "peacasso/neon_diff"]
+	path = peacasso/neon_diff
+	url = https://github.com/neonsecret/stable-diffusion
