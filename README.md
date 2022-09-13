@@ -1,4 +1,4 @@
-# Peacasso
+# Neonpeacasso
 
 [comment]: <> ([![Open In Colab]&#40;https://colab.research.google.com/assets/colab-badge.svg&#41;]&#40;https://colab.research.google.com/github/victordibia/peacasso/blob/master/notebooks/tutorial.ipynb&#41;)
 
@@ -43,7 +43,7 @@ Don't have a GPU, you can still use the python api and UI in a colab notebook. S
 You can use the library from the ui by running the following command:
 
 ```bash
-peacasso ui  --port=8080
+neonpeacasso ui  --port=8080
 ```
 
 Then navigate to http://localhost:8080/ in your browser.
@@ -54,8 +54,8 @@ You can also use the python api by running the following command:
 
 import os
 from dotenv import load_dotenv
-from peacasso.generator import ImageGenerator
-from peacasso.datamodel import GeneratorConfig
+from neonpeacasso.generator import ImageGenerator
+from neonpeacasso.datamodel import GeneratorConfig
 
 token = os.environ.get("HF_API_TOKEN")
 gen = ImageGenerator(token=token)
