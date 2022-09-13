@@ -8,10 +8,8 @@ from omegaconf import OmegaConf
 
 import pathlib
 import os
-os.chdir(pathlib.Path(__file__).parent.resolve())
-
-sys.path.append("neon_diff/")
-sys.path.append("neon_diff/optimizedSD")
+sys.path.append(pathlib.Path(__file__).parent.resolve().as_posix() + "/neon_diff/")
+sys.path.append(pathlib.Path(__file__).parent.resolve().as_posix() + "/neon_diff/optimizedSD/")
 from neonpeacasso.neon_diff.ldm.util import instantiate_from_config
 from neonpeacasso.datamodel import GeneratorConfig
 from neonpeacasso.neon_diff.optimizedSD.optimized_txt2img import get_image
@@ -36,7 +34,6 @@ class ImageGenerator:
 
     def __init__(
             self,
-            model: str = "CompVis/stable-diffusion-v1-4",
             cuda_device: int = 0,
     ) -> None:
         try:
@@ -61,7 +58,7 @@ class ImageGenerator:
         for key in lo:
             sd["model2." + key[6:]] = sd.pop(key)
 
-        config = OmegaConf.load("neon_diff/optimizedSD/v1-inference.yaml")
+        config = OmegaConf.load(pathlib.Path(__file__).parent.resolve().as_posix() + "/neon_diff/optimizedSD/v1-inference.yaml")
 
         self._model = instantiate_from_config(config.modelUNet)
         _, _ = self._model.load_state_dict(sd, strict=False)

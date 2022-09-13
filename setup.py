@@ -40,4 +40,5 @@ setup(
     entry_points={
         "console_scripts": ['neonpeacasso = neonpeacasso.cli:run']
     },
+    include_package_data=True,
 )

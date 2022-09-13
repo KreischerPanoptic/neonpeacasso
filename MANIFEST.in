@@ -1,1 +1,2 @@
 recursive-include  neonpeacasso/web/backend/ui *
+recursive-include  neonpeacasso/neon_diff *
