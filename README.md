@@ -22,18 +22,18 @@ Clearly, Peacasso (UI) might not be for those interested in low level code.
 
 - Step 1: **Access to Weights via HuggingFace**
 
-  Access to the diffusion model weights requires a HuggingFace model account and access token. Please create an account at [huggingface.co](https://huggingface.co/), get an [access token](https://huggingface.co/settings/tokens) and agree to the model terms [here](https://huggingface.co/CompVis/stable-diffusion-v1-4). Next, create a `HF_API_TOKEN` environment variable containing your token. `export HF_API_TOKEN=your_token`. Note that the first time you run peacasso, the weights for the SD model are [cached locally](https://huggingface.co/transformers/v4.0.1/installation.html#caching-models) on your machine. In theory, you can download the weights, and run peacasso by pointing to the folder with the weights.
+  Log in to your account [here](https://huggingface.co/CompVis/stable-diffusion-v-1-4-original) and, after that, download [this](https://huggingface.co/CompVis/stable-diffusion-v-1-4-original/resolve/main/sd-v1-4.ckpt). Rename it to model.ckpt
 
 - Step 2: **Verify Environment - Pythong 3.7+ and CUDA**
   Setup and verify that your python environment is `python 3.7` or higher (preferably, use Conda). Also verify that you have CUDA installed correctly (`torch.cuda.is_available()` is true) and your GPU has at least [2GB of VRAM memory](https://stability.ai/blog/stable-diffusion-public-release).
 
-- Step 3: **Download the model.ckpt**
-  And put it to `peacasso/neon_diff/models/ldm/stable-diffusion-v1/model.ckpt`
+- Step 3: **After downloading the the model.ckpt,**
+  Put it to `peacasso/neon_diff/models/ldm/stable-diffusion-v1/model.ckpt`
 
 Once requirements are met, run the following command to install the library:
 
 ```bash
-pip install peacasso
+pip install git+https://github.com/neonsecret/neonpeacasso.git
 ```
 
 Don't have a GPU, you can still use the python api and UI in a colab notebook. See this [colab notebook](https://colab.research.google.com/github/victordibia/peacasso/blob/master/notebooks/tutorial.ipynb) for more details.
