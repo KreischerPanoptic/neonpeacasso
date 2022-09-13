@@ -1,5 +1,4 @@
 # from dataclasses import dataclass
-import random
 from typing import Any, List, Optional, Union
 
 from pydantic.dataclasses import dataclass
@@ -38,8 +37,5 @@ class GeneratorConfig:
     from_file: Optional[bool] = False
 
     outpath = "."
-    scale = guidance_scale
-    ddim_steps = num_inference_steps
-    ddim_eta = eta
 
 

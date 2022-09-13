@@ -12,9 +12,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 from fastapi.staticfiles import StaticFiles
 
-from peacasso.datamodel import GeneratorConfig
-from peacasso.generator import ImageGenerator
-from peacasso.utils import base64_to_pil
+from neonpeacasso.datamodel import GeneratorConfig
+from neonpeacasso.generator import ImageGenerator
+from neonpeacasso.utils import base64_to_pil
 
 # # load token from .env variable
 generator = ImageGenerator()
@@ -44,7 +44,7 @@ os.makedirs(files_static_root, exist_ok=True)
 #     )
 
 
-# mount peacasso front end UI files
+# mount neonpeacasso front end UI files
 app.mount("/", StaticFiles(directory=static_folder_root, html=True), name="ui")
 api.mount("/files", StaticFiles(directory=files_static_root, html=True), name="files")
 

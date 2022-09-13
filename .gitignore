@@ -1,6 +1,6 @@
 output/
 samples/
-peacasso/web/backend/files
+neonpeacasso/web/backend/files
 examples/experiment_results.json
 examples/data
 data  

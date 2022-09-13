@@ -1,3 +1,4 @@
+import importlib
 import os
 from dataclasses import asdict
 from typing import List
@@ -8,13 +9,13 @@ from omegaconf import OmegaConf
 from torch import autocast
 import sys
 
-from peacasso.neon_diff.ldm.util import instantiate_from_config
+from neonpeacasso.neon_diff.ldm.util import instantiate_from_config
 
 sys.path.append("neon_diff/")
 sys.path.append("neon_diff/optimizedSD")
-from peacasso.datamodel import GeneratorConfig
+from neonpeacasso.datamodel import GeneratorConfig
 from neon_diff.optimizedSD.optimized_txt2img import get_image
-# from peacasso.pipelines import StableDiffusionPipeline
+# from neonpeacasso.pipelines import StableDiffusionPipeline
 
 
 # from diffusers import StableDiffusionPipeline
@@ -36,7 +37,11 @@ class ImageGenerator:
         model: str = "CompVis/stable-diffusion-v1-4",
         cuda_device: int = 0,
     ) -> None:
-        sd = load_model_from_config("neon_diff/models/ldm/stable-diffusion-v1/model.ckpt")
+        try:
+            p = importlib.util.find_spec("neonpeacasso").origin.replace("__init__.py", "ckpt_path.txt")
+        except:
+            p = "ckpt_path.txt"
+        sd = load_model_from_config(open(p, "r", encoding="utf-8").readline())
         li, lo = [], []
         for key, value in sd.items():
             sp = key.split(".")

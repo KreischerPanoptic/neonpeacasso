@@ -12274,7 +12274,7 @@
                 value: n.width,
                 control: r.createElement(Pu, {
                     min: 448,
-                    max: 1024,
+                    max: 2048,
                     defaultValue: n.width,
                     step: 64,
                     onAfterChange: function (e) {
@@ -12287,7 +12287,7 @@
                 value: n.height,
                 control: r.createElement(Pu, {
                     min: 448,
-                    max: 1024,
+                    max: 2048,
                     defaultValue: n.height,
                     step: 64,
                     onAfterChange: function (e) {
@@ -15945,7 +15945,7 @@
             e.data;
             var t = {
                     status: !1,
-                    status_message: "Error fetching generation. There is a chance the server is down. Visit the peacasso repo to learn more about running your own server"
+                    status_message: "Error fetching generation. There is a chance the server is down. Visit the neonpeacasso repo to learn more about running your own server"
                 }, n = new Fh, o = (0, Ei.$o)("config") || {
                     prompt: "portrait of leprechaun, intricate, elegant, highly detailed, digital painting, artstation, concept art, smooth, sharp focus, illustration, art by artgerm and greg rutkowski and alphonse mucha, 8 k ",
                     num_images: 6,
