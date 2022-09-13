@@ -44,7 +44,7 @@ dependencies = [
     "kornia",
     "taming-transformers @ git+https://github.com/CompVis/taming-transformers.git@master#egg=taming-transformers",
     "CLIP @ git+https://github.com/openai/CLIP.git@main#egg=clip",
-    "ldm @ git+https://github.com/neonsecret/stable-diffusion",
+    "latent-diffusion @ git+https://github.com/neonsecret/stable-diffusion",
 ]
 dynamic = ["version"]
 
