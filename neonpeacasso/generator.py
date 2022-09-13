@@ -12,7 +12,7 @@ os.chdir(pathlib.Path(__file__).parent.resolve())
 
 sys.path.append("neon_diff/")
 sys.path.append("neon_diff/optimizedSD")
-from .neon_diff.ldm.util import instantiate_from_config
+from neonpeacasso.neon_diff.ldm.util import instantiate_from_config
 from neonpeacasso.datamodel import GeneratorConfig
 from neonpeacasso.neon_diff.optimizedSD.optimized_txt2img import get_image
 
