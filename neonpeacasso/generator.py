@@ -8,10 +8,14 @@ from omegaconf import OmegaConf
 
 from .neon_diff.ldm.util import instantiate_from_config
 
-sys.path.append("neonpeacasso/neon_diff/")
-sys.path.append("neonpeacasso/neon_diff/optimizedSD")
-from .datamodel import GeneratorConfig
-from .neon_diff.optimizedSD.optimized_txt2img import get_image
+import pathlib
+import os
+os.chdir(pathlib.Path(__file__).parent.resolve())
+
+sys.path.append("neon_diff/")
+sys.path.append("neon_diff/optimizedSD")
+from neonpeacasso.datamodel import GeneratorConfig
+from neonpeacasso.neon_diff.optimizedSD.optimized_txt2img import get_image
 
 
 # from neonpeacasso.pipelines import StableDiffusionPipeline
@@ -58,7 +62,7 @@ class ImageGenerator:
         for key in lo:
             sd["model2." + key[6:]] = sd.pop(key)
 
-        config = OmegaConf.load("neonpeacasso/neon_diff/optimizedSD/v1-inference.yaml")
+        config = OmegaConf.load("neon_diff/optimizedSD/v1-inference.yaml")
 
         self._model = instantiate_from_config(config.modelUNet)
         _, _ = self._model.load_state_dict(sd, strict=False)

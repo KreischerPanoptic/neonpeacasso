@@ -29,7 +29,6 @@ Clearly, Peacasso (UI) might not be for those interested in low level code.
 - Step 3: run this command:
 ```
 pip install -e git+https://github.com/CompVis/taming-transformers.git@master#egg=taming-transformers
-
 ```
 
 Once requirements are met, run the following command to install the library:
