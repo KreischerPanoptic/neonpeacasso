@@ -34,7 +34,6 @@ setup(
         "transformers",
         "torchmetrics",
         "kornia",
-        "taming-transformers @ git+https://github.com/CompVis/taming-transformers.git@master#egg=taming-transformers",
         "CLIP @ git+https://github.com/openai/CLIP.git@main#egg=clip",
         "latent-diffusion @ git+https://github.com/neonsecret/stable-diffusion",
     ],

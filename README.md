@@ -26,6 +26,11 @@ Clearly, Peacasso (UI) might not be for those interested in low level code.
 
 - Step 2: **Verify Environment - Pythong 3.7+ and CUDA**
   Setup and verify that your python environment is `python 3.7` or higher (preferably, use Conda). Also verify that you have CUDA installed correctly (`torch.cuda.is_available()` is true) and your GPU has at least [2GB of VRAM memory](https://stability.ai/blog/stable-diffusion-public-release).
+- Step 3: run this command:
+```
+pip install -e git+https://github.com/CompVis/taming-transformers.git@master#egg=taming-transformers
+
+```
 
 Once requirements are met, run the following command to install the library:
 

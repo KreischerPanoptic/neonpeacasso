@@ -1,20 +1,19 @@
 import importlib
-import os
-from dataclasses import asdict
+import sys
 from typing import List
 
 import torch
 from PIL import Image
 from omegaconf import OmegaConf
-from torch import autocast
-import sys
 
-from neonpeacasso.neon_diff.ldm.util import instantiate_from_config
+from .neon_diff.ldm.util import instantiate_from_config
 
-sys.path.append("neon_diff/")
-sys.path.append("neon_diff/optimizedSD")
-from neonpeacasso.datamodel import GeneratorConfig
-from neon_diff.optimizedSD.optimized_txt2img import get_image
+sys.path.append("neonpeacasso/neon_diff/")
+sys.path.append("neonpeacasso/neon_diff/optimizedSD")
+from .datamodel import GeneratorConfig
+from .neon_diff.optimizedSD.optimized_txt2img import get_image
+
+
 # from neonpeacasso.pipelines import StableDiffusionPipeline
 
 
@@ -33,9 +32,9 @@ class ImageGenerator:
     """Generate image from prompt"""
 
     def __init__(
-        self,
-        model: str = "CompVis/stable-diffusion-v1-4",
-        cuda_device: int = 0,
+            self,
+            model: str = "CompVis/stable-diffusion-v1-4",
+            cuda_device: int = 0,
     ) -> None:
         try:
             p = importlib.util.find_spec("neonpeacasso").origin.replace("__init__.py", "ckpt_path.txt")
@@ -59,7 +58,7 @@ class ImageGenerator:
         for key in lo:
             sd["model2." + key[6:]] = sd.pop(key)
 
-        config = OmegaConf.load("neon_diff/optimizedSD/v1-inference.yaml")
+        config = OmegaConf.load("neonpeacasso/neon_diff/optimizedSD/v1-inference.yaml")
 
         self._model = instantiate_from_config(config.modelUNet)
         _, _ = self._model.load_state_dict(sd, strict=False)
