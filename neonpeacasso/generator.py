@@ -59,6 +59,7 @@ class ImageGenerator:
             sd["model2." + key[6:]] = sd.pop(key)
 
         config = OmegaConf.load(pathlib.Path(__file__).parent.resolve().as_posix() + "/neon_diff/optimizedSD/v1-inference.yaml")
+        cuda_device = cuda_device if torch.cuda.is_available() else "cpu"
 
         self._model = instantiate_from_config(config.modelUNet)
         _, _ = self._model.load_state_dict(sd, strict=False)

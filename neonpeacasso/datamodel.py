@@ -1,6 +1,8 @@
 # from dataclasses import dataclass
+import sys
 from typing import Any, List, Optional, Union
 
+import torch.cuda
 from pydantic.dataclasses import dataclass
 
 
@@ -29,7 +31,7 @@ class GeneratorConfig:
     fixed_code: Optional[bool] = True
     C: Optional[int] = 4
     f: Optional[int] = 8
-    device: Optional[str] = "cuda"
+    device: Optional[str] = "cuda" if (sys.platform != "darwin" and torch.cuda.is_available()) else "cpu"
     unet_bs: Optional[int] = 1
     precision: str = "autocast"
     format: str = "png"
