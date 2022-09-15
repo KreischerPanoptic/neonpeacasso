@@ -8,6 +8,7 @@ from omegaconf import OmegaConf
 
 import pathlib
 import os
+
 sys.path.append(pathlib.Path(__file__).parent.resolve().as_posix() + "/neon_diff/")
 sys.path.append(pathlib.Path(__file__).parent.resolve().as_posix() + "/neon_diff/optimizedSD/")
 from neonpeacasso.neon_diff.ldm.util import instantiate_from_config
@@ -58,7 +59,8 @@ class ImageGenerator:
         for key in lo:
             sd["model2." + key[6:]] = sd.pop(key)
 
-        config = OmegaConf.load(pathlib.Path(__file__).parent.resolve().as_posix() + "/neon_diff/optimizedSD/v1-inference.yaml")
+        config = OmegaConf.load(
+            pathlib.Path(__file__).parent.resolve().as_posix() + "/neon_diff/optimizedSD/v1-inference.yaml")
         cuda_device = cuda_device if torch.cuda.is_available() else "cpu"
 
         self._model = instantiate_from_config(config.modelUNet)
@@ -77,21 +79,13 @@ class ImageGenerator:
         _, _ = self._modelFS.load_state_dict(sd, strict=False)
         self._modelFS.eval()
         del sd
-        self._model.half()
-        self._modelCS.half()
-        self._modelFS.half()
+        if cuda_device != "cpu":
+            self._model.half()
+            self._modelCS.half()
+            self._modelFS.half()
         self._model.to(torch.device(cuda_device))
         self._modelFS.to(torch.device(cuda_device))
-        self._model.to(torch.device(cuda_device))
-
-        # assert token is not None, "HF_API_TOKEN environment variable must be set."
-        # self.device = f"cuda:{cuda_device}" if torch.cuda.is_available() else "cpu"
-        # self.pipe = StableDiffusionPipeline.from_pretrained(
-        #     model,
-        #     revision="fp16",
-        #     torch_dtype=torch.float16,
-        #     use_auth_token=token,
-        # ).to(self.device)
+        self._modelCS.to(torch.device(cuda_device))
 
     def generate(self, config: GeneratorConfig) -> Image:
         """Generate image from prompt"""
