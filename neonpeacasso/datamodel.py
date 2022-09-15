@@ -33,7 +33,7 @@ class GeneratorConfig:
     f: Optional[int] = 8
     device: Optional[str] = "cuda" if (sys.platform != "darwin" and torch.cuda.is_available()) else "cpu"
     unet_bs: Optional[int] = 1
-    precision: str = "autocast"
+    precision: str = "full"
     format: str = "png"
     sampler: str = "plms"
     from_file: Optional[bool] = False
