@@ -1,10 +1,10 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='neonpeacasso',
+    name='funeonpeacasso',
     version='0.1',
     packages=find_packages(),
-    url='https://github.com/neonsecret/neonpeacasso',
+    url='https://github.com/KreischerPanoptic/neonpeacasso',
     license_files=('LICENSE',),
     author='neon',
     author_email='slava.v.ivannikov@gmail.com',
@@ -38,7 +38,7 @@ setup(
         "latent-diffusion @ git+https://github.com/neonsecret/stable-diffusion",
     ],
     entry_points={
-        "console_scripts": ['neonpeacasso = neonpeacasso.cli:run']
+        "console_scripts": ['funeonpeacasso = neonpeacasso.cli:run']
     },
     include_package_data=True,
 )
